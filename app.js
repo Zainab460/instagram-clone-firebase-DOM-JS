@@ -12,10 +12,68 @@ class Note {
 class App {
     constructor() {
         this.notes=[];
+        // Authentication
+        this.$app = document.querySelector("#app");
+        this.$AuthContainer = document.querySelector("#firebaseui-auth-container");
 
+        // signout btn
+        this.$logoutButton = document.querySelector(".logout")
+
+        this.ui = new firebaseui.auth.AuthUI(auth);
+        this.manageAuth()
+      
+
+    }
+    manageAuth() {
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.redirectToApp()
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/firebase.User
+              var uid = user.uid;
+              // ...
+            } else {
+                this.redirectToAuth()
+              // User is signed out
+            }
+          });
+          
+    }
+    redirectToApp() {
+        this.$AuthContainer.style.display = "none";
+        this.$app.style.display = "block";
+    }
+
+    redirectToAuth() {
+        this.$AuthContainer.style.display = "block";
+        this.$app.style.display = "none";
+
+        this.ui.start('#firebaseui-auth-container', {
+            signInOptions: [
+              firebase.auth.EmailAuthProvider.PROVIDER_ID,
+              firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            ],
+            // Other config options...
+          });
+    }
+
+    leave() {
+        firebase
+        .auth()
+        .signOut()
+        .then(() => {
+            this.redirectToAuth()
+          }).catch((error) => {
+            console.log("ERROR OCCURRED", error)
+          });
+          
     }
 
     addEventListeners() {
+
+        this.$logoutButton.addEventListener("click", (event) => {
+            this.leave();
+          });
 
     }
 

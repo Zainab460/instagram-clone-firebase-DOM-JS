@@ -8,19 +8,17 @@
       href="https://static.cdninstagram.com/rsrc.php/v3/yt/r/30PrGfR3xhB.png"
       type="image/png"
     />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
-      crossorigin="anonymous"
-    />
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+   
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./mobile-styles.css" />
     <title>Instagram</title>
   </head>
 
   <body>
-    <div class="main-container">
+    <div id="firebaseui-auth-container"></div>
+    <div class="main-container" id="app">
       <div class="navbar">
         <div class="navbar-inner">
           <div class="logo">
@@ -108,13 +106,16 @@
                   <div class="poA5q" style="margin-left: -423px"></div>
                 </div>
               </div>
-              <div class="profile-pic margin-left">
+              <div class="profile-pic margin-left uzzi">
                 <img
                   alt="imharjotsingh's profile picture"
                   data-testid="user-avatar"
                   draggable="false"
                   src="assets/akhil.png"
                 />
+              </div>
+              <div class="margin-left logout">
+                <button type="button" class="btn ">Logout</button>
               </div>
             </div>
           </div>
@@ -1119,6 +1120,7 @@
       const auth = firebase.auth();
       const db = firebase.firestore();
       console.log(firebase)
+    
     </script>
     <script src="./app.js"></script>
   </body>
