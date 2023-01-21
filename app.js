@@ -14,69 +14,62 @@ class App {
         this.notes=[];
         // Authentication
         this.$app = document.querySelector("#app");
-        this.$AuthContainer = document.querySelector("#firebaseui-auth-container");
+        this.$authContainer = document.querySelector("#firebaseui-auth-container");
 
         // signout btn
-        this.$logoutButton = document.querySelector(".logout")
-
+        this.$logoutButton = document.querySelector(".logout");
+        
         this.ui = new firebaseui.auth.AuthUI(auth);
-        this.manageAuth()
+        this.manageAuth();
+
+        this.addEventListeners();
       
 
     }
     manageAuth() {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                this.redirectToApp()
-              // User is signed in, see docs for a list of available properties
-              // https://firebase.google.com/docs/reference/js/firebase.User
-              var uid = user.uid;
-              // ...
+                this.redirectToApp();
             } else {
-                this.redirectToAuth()
-              // User is signed out
+                this.redirectToAuth();
             }
           });
           
     }
     redirectToApp() {
-        this.$AuthContainer.style.display = "none";
+        this.$authContainer.style.display = "none";
         this.$app.style.display = "block";
     }
 
     redirectToAuth() {
-        this.$AuthContainer.style.display = "block";
+        this.$authContainer.style.display = "block";
         this.$app.style.display = "none";
 
         this.ui.start('#firebaseui-auth-container', {
             signInOptions: [
               firebase.auth.EmailAuthProvider.PROVIDER_ID,
-              firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+              
             ],
             // Other config options...
           });
     }
 
-    leave() {
-        firebase
-        .auth()
-        .signOut()
-        .then(() => {
+    handleLogout() {
+        firebase.auth().signOut().then(() => {
             this.redirectToAuth()
           }).catch((error) => {
             console.log("ERROR OCCURRED", error)
+        
           });
           
     }
-
     addEventListeners() {
+        this.$logoutButton.addEventListener("click", (event) =>{
+            this. handleLogout();
 
-        this.$logoutButton.addEventListener("click", (event) => {
-            this.leave();
-          });
+        });
 
     }
-
     addNote(id, {title,text}) {
         const newNote = new Note(id, title, text);
         this.notes =[...this.notes, newNote]
