@@ -17,6 +17,19 @@
   </head>
 
   <body>
+
+    <div class="post-box">
+      <div class="upload-file">
+        Create a post
+        <input type="file" id="files" multiple //><br/><br/>
+        <textarea name="caption" id="caption"></textarea><br/>
+        <button id="send">Send</button>
+        <p id="uploading"></p>
+        <progress value="0" max="100" id="progress"></progress>
+      </div>
+    </div>
+
+
     <div id="firebaseui-auth-container"></div>
     <div id="app">
       <div class="main-container">
@@ -1116,6 +1129,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
     <script>
 
       const firebaseConfig = {
@@ -1129,9 +1143,16 @@
       firebase.initializeApp(firebaseConfig);
       const auth = firebase.auth();
       const db = firebase.firestore();
-      console.log(firebase)
-    
+      const storage = firebase.storage();
     </script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"
+      integrity="sha512-AvtLzKgbVcTZJ0QZ3nLJoTGN2wiE/emjebM9xneyqhtEBRTsNB+8oeQGkOmyOF+gnJd7k3Zvnghs9m6EuTpTEw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    
     <script src="./app.js"></script>
   </body>
 </html>
