@@ -8,27 +8,28 @@
       href="https://static.cdninstagram.com/rsrc.php/v3/yt/r/30PrGfR3xhB.png"
       type="image/png"
     />
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.0/firebase-ui-auth.css" />
-   
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css"
+    />
+
     <link rel="stylesheet" href="./style.css" />
     <link rel="stylesheet" href="./mobile-styles.css" />
     <title>Instagram</title>
   </head>
 
   <body>
-
     <div class="post-box">
       <div class="upload-file">
-        Create a post
-        <input type="file" id="files" multiple //><br/><br/>
-        <textarea name="caption" id="caption"></textarea><br/>
+        Create a post <input type="file" id="files" multiple //><br /><br />
+        <textarea name="caption" id="caption"></textarea><br />
         <button id="send">Send</button>
         <p id="uploading"></p>
         <progress value="0" max="100" id="progress"></progress>
       </div>
     </div>
-
 
     <div id="firebaseui-auth-container"></div>
     <div id="app">
@@ -69,7 +70,7 @@
                     ></a>
                   </div>
                 </div>
-                
+
                 <div class="margin-left">
                   <a class="xWeGp" href="/direct/inbox/" tabindex="0"
                     ><svg
@@ -137,7 +138,6 @@
                 <div class="logout-container">
                   <button class="logout btn">Logout</button>
                 </div>
-
               </div>
             </div>
           </div>
@@ -191,7 +191,7 @@
                     <div class="story-border"></div>
                     <span class="story-text">cleverqazi</span>
                   </div>
-  
+
                   <div class="story">
                     <img
                       class="story-image"
@@ -1124,26 +1124,33 @@
         </main>
       </div>
     </div>
-    
-
+    <!-- Firebase Starts -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+   https://firebase.google.com/docs/web/setup#available-libraries -->
+
+    <!-- Add Firebase products that you want to use -->
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
-    <script>
-
+    <script type="text/javascript">
       const firebaseConfig = {
-        apiKey: "AIzaSyDBpiRQGejka78lJ6WSNg0Q1H1KHfeVL2I",
-        authDomain: "instagram-clone-26f67.firebaseapp.com",
-        projectId: "instagram-clone-26f67",
-        storageBucket: "instagram-clone-26f67.appspot.com",
-        messagingSenderId: "422187802362",
-        appId: "1:422187802362:web:f4864076a6c1d764bf3343",
+        apiKey: "AIzaSyD9tlCzV_mjfjY-sISmHMqhhIOtTUMe3X0",
+        authDomain: "instagram-clone-a9aa0.firebaseapp.com",
+        projectId: "instagram-clone-a9aa0",
+        storageBucket: "instagram-clone-a9aa0.appspot.com",
+        messagingSenderId: "946669247582",
+        appId: "1:946669247582:web:27f4fd39b735ceea0c68cf",
       };
+      
       firebase.initializeApp(firebaseConfig);
+      
       const auth = firebase.auth();
       const db = firebase.firestore();
       const storage = firebase.storage();
+
+      console.log(db)
     </script>
 
     <script
@@ -1152,7 +1159,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    
+
+
     <script src="./app.js"></script>
   </body>
 </html>
