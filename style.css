@@ -360,3 +360,83 @@ main {
     cursor: pointer;
     margin: 0px 5px;
 }
+
+
+.default-modal {
+    display: block; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .default-modal-content {
+    max-width: 400px;
+    min-height: 336px;
+    background: white;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    border: 0.5px solid #e0e1e0;
+    border-radius: 8px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .default-modal-content > .option-btn {
+    min-height: 48px;
+    width: 100%;
+    font-size: 14px;
+    padding: 4px 8px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #cdcbcb;
+  }
+  
+  .authenticated-modal{
+    display: none;
+    position: fixed;
+    top: 0;
+    left:0;
+    background: rgba(0, 0, 0 , 0.7);
+    width: 100vw;
+    height: 100vh;
+  }
+  .action-icon{
+      font-weight: 700;
+      color: rgb(237, 73, 86);
+  }
+  .modal-content{
+    max-width: 400px;
+    min-height: 336px;
+    background: white;
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    border: 0.5px solid #e0e1e0;
+    border-radius: 8px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .modal-content > .option-btn{
+      min-height: 48px;
+      width: 100%;
+      font-size: 14px;
+      padding: 4px 8px;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid #cdcbcb;
+  }
+  .option-btn:first-child{
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+  .option-btn:last-child{
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border: none;
+  }
+  
+  /* Modal Style Ends */

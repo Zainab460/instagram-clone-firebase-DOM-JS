@@ -41,7 +41,6 @@ class App {
       if (user) {
         this.username = user.displayName;
         this.userId = user.uid;
-        console.log(this.userId);
         this.post.username = user.displayName;
         this.redirectToApp();
       } else {
