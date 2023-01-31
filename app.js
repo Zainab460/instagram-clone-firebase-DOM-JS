@@ -1,4 +1,10 @@
-
+class Post {
+  constructor(id, caption, image) {
+    this.id = id;
+    this.caption = caption;
+    this.image = image;
+  }
+}
 
 
 class App {
@@ -12,9 +18,12 @@ class App {
       username: "",
       timestamp: this.getTimestamp(),
     };
+
+
     // Authentication
     this.$app = document.querySelector("#app");
     this.$authContainer = document.querySelector("#firebaseui-auth-container");
+    this.$username = document.querySelector(".user-name")
 
     // signout btn
     this.$logoutButton = document.querySelector(".logout");
@@ -26,9 +35,21 @@ class App {
     this.$filesUpload = document.querySelector("#files");
     this.$captionArea = document.querySelector("#caption");
     this.$sendButton = document.querySelector("#send");
+    this.$cancelBtn = document.querySelector("#cancel");
     this.$progress = document.querySelector("#progress");
     this.$uploading = document.querySelector("#uploading");
     this.$posts = document.querySelector(".posts");
+
+    // modal form
+    this.$optionButton = document.querySelector("options");
+    this.$authModal = document.querySelector(".authenticated-modal");
+    this.$defaultModal = document.querySelector(".default-modal");
+    this.$editBtn = document.querySelector("#edit-btn");
+    this.deletePost = document.querySelector("#delete-post");
+
+    console.log(this.post);
+
+    // modal form
 
     this.ui = new firebaseui.auth.AuthUI(auth);
     this.manageAuth();
@@ -39,9 +60,8 @@ class App {
   manageAuth() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.username = user.displayName;
+        this.$username.innerHTML = user.displayName;
         this.userId = user.uid;
-        this.post.username = user.displayName;
         this.redirectToApp();
       } else {
         this.redirectToAuth();
@@ -69,8 +89,13 @@ class App {
     });
   }
   addEventListeners() {
+    document.body.addEventListener("click", (event) => {
+      this.openModal(event);
+      this.closeModal(event);
+      this.cancelUpload(event);
+      this.handleUpdate(event);
 
-    
+    });
     this.$filesUpload.addEventListener("change", (event) => {
       this.chosenFile(event);
     });
@@ -89,6 +114,40 @@ class App {
     
    
    
+  };
+  handleUpdate(event) {
+    const isEditBtnClickedOn = this.$editBtn.contains(event.target);
+    const isSendFileClickedOn = this.$filesToUpload.contains(event.target);
+    if (isEditBtnClickedOn) {
+      this.goToPost();
+      // this.$app.style.display = "none";
+      // this.$uploadButton.style.display = "block";
+      // this.$updateBtn.style.display = "block";
+      // this.$sendButton.style.display = "none";
+      // this.$captionArea.value = "";
+    }
+    else if (isUpdateBtnClickedOn) {
+      this.fetchImageFromDB();
+    }
+    else if (isInputFileClickedOn) {
+      this.$sendBtn.style.display = "block";
+      this.$updateBtn.style.display = "none";
+      this.uploadToFB();
+      this.deletePost();
+    }
+  }
+
+  openModal(event) {
+    const $BtnClickOn = event.target.closest(".options")
+    if($BtnClickOn) {
+      this.$authModal.style.display = "block";
+    }
+  }
+
+  closeModal(event) {
+    if(event.target == this.$authModal) {
+      this.$authModal.style.display = "none"
+    }
   }
 
   handleLogout() {
@@ -106,6 +165,17 @@ class App {
     this.$postBox.style.display = "block";
     this.$authContainer.style.display = "none";
     this.$app.style.display = "none";
+  }
+
+  cancelUpload(event) {
+    const isCancelBtnClickedOn = this.$cancelBtn.contains(event.target);
+    if (isCancelBtnClickedOn) {
+      this.$filesUpload.value = "";
+      this.$progress.value = "";
+      this.$uploading.innerHTML = "";
+      this.$captionArea.value = "";
+      this.redirectToApp();
+    }
   }
 
   chosenFile(event) {
@@ -172,19 +242,6 @@ class App {
           this.posts = doc.data().posts;
           this.displayPost();
         } else {
-          // doc.data() will be undefined in this case
-          // console.log("No such document!");
-          // db.collection("users")
-          //   .doc(this.userId)
-          //   .set({
-          //     posts: this.posts,
-          //   })
-          //   .then(() => {
-          //     console.log("User successfully Created!");
-          //   })
-          //   .catch((error) => {
-          //     console.error("Error writing document: ", error);
-          //   });
           this.savePosts();
         }
       })
@@ -207,10 +264,19 @@ class App {
       });
   }
   
-
-  // deleteNote(id) {
-  //   this.notes = this.notes.filter((note) => note.id != id);
-  // }
+  editPost(id, { caption, image }) {
+    this.post = this.post.map((post) => {
+      if (post.id == id) {
+        post.caption = caption;
+        post.image = image;
+      }
+      return post;
+    });
+    this.displayPost();
+  }
+  deletePost(id) {
+    this.posts = this.posts.filter((posts) => post.id != id);
+  }
   displayPost() {
     this.$posts.innerHTML = this.posts
       .map(

@@ -439,4 +439,7 @@ main {
     border: none;
   }
   
+  .open-modal {
+    visibility: visible;
+  }
   /* Modal Style Ends */
