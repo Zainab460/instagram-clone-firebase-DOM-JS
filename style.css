@@ -53,7 +53,7 @@
 
 .search-icon {
     display: inline-block;
-    background-image: url(https://www.instagram.com/static/bundles/es6/sprite_core_2x_bcd90c1d4868.png/bcd90c1d4868.png);
+    background-image: url("https://www.instagram.com/static/bundles/es6/sprite_core_2x_bcd90c1d4868.png/bcd90c1d4868.png");
     background-repeat: no-repeat;
     background-size: 440px 411px;
     background-position: -428px -241px;
@@ -443,3 +443,65 @@ main {
     visibility: visible;
   }
   /* Modal Style Ends */
+
+.post-box {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    width: 100vw;
+    height: 100vh;
+}
+.upload-file {
+    max-width: 400px;
+    min-height: 336px;
+    background: rgb(141, 6, 96);
+    box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
+    border: 0.5px solid  grey;
+    border-radius: 8px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+.upload-file >input {
+    font-size: 15px;
+    margin-left: 100px;
+    margin-top: 50px;
+    
+}
+textarea {
+    width: 300px;
+    height: 100px;
+    margin-left: 50px;
+    border-radius: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    outline: none;
+    padding: 10px;
+}
+#send {
+    margin-left: 110px;
+    margin-top: 5px;
+    margin-right: 10px;
+    padding: 6px 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    color: black ;
+    background-color:turquoise;
+
+}
+#cancel {
+    padding: 6px 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 15px;
+    color: black;
+    background-color:grey;
+
+
+}
