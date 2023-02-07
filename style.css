@@ -4,6 +4,28 @@
     box-sizing: border-box;
 }
 
+/* tooltip */
+.tooltip {
+    position: relative;
+  }
+  .tooltip-text {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    font-size: 0.78rem;
+    background-color: #323232;
+    color: white;
+    opacity: 0.8;
+    padding: 5px;
+    white-space: nowrap;
+    border-radius: 5px;
+    visibility: hidden;
+    z-index: 1;
+  }
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
+  }
+
 :root {
     --color-border: #dbdbdb;
 }
@@ -32,6 +54,7 @@
 
 .logo {
     width: 360px;
+    cursor: pointer;
 }
 
 .search-bar {
@@ -504,4 +527,7 @@ textarea {
     background-color:grey;
 
 
+}
+.material-icons-outlined {
+    cursor: pointer;
 }

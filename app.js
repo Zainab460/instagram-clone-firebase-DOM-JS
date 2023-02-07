@@ -104,7 +104,6 @@ class App {
     document.body.addEventListener("click", (event) => {
       this.openModal(event);
       this.closeModal(event);
-      this.cancelUpload(event);
       
     });
     this.$filesUpload.addEventListener("change", (event) => {
@@ -122,7 +121,9 @@ class App {
     this.$logoutButton.addEventListener("click", (event) => {
       this.handleLogout(event);
     });
-    
+    this.$cancelBtn.addEventListener("click", (event) => {
+      this.cancelUpload(event);
+    })
     
    
    
@@ -163,12 +164,9 @@ class App {
   }
 
   cancelUpload(event) {
-    const isCancelBtnClickedOn = this.$cancelBtn.contains(event.target);
-    if (isCancelBtnClickedOn) {
-      this.$postBox.style.display = "none"
-      this.redirectToApp();
-
-    }
+    this.$postBox.style.display = "none";
+    this.$authContainer.style.display = "none";
+    this.$app.style.display = "block";
   };
 
   chosenFile(event) {
