@@ -2,6 +2,7 @@
     margin:0;
     padding:0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* tooltip */
@@ -12,13 +13,12 @@
     position: absolute;
     left: 0;
     top: 100%;
-    font-size: 0.78rem;
+    font-size: 0.76rem;
     background-color: #323232;
     color: white;
-    opacity: 0.8;
-    padding: 5px;
+    padding: 5px 7px;
     white-space: nowrap;
-    border-radius: 5px;
+    border-radius: 9px;
     visibility: hidden;
     z-index: 1;
   }
@@ -37,10 +37,10 @@
 }
 
 .navbar {
-    height: 54px;
+    height: 50px;
     border-bottom: 1px solid var(--color-border);
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -48,7 +48,6 @@
     width: 975px;
     height: 100%;
     display: flex;
-    padding: 0px 20px; 
     align-items: center;
 }
 
@@ -59,15 +58,16 @@
 
 .search-bar {
     background-color: #fafafa;
-    width: 215px;
-    height: 28px;
+    border-radius: 5px;
+    width: 250px;
+    height: 30px;
 
 }
 
 .search-bar-inner {
     background-color: #fafafa;
-    border-radius: 3px;
-    padding: 2px;
+    border-radius: 5px;
+    padding: 1px;
     border: 1px solid var(--color-border);
     display: flex;
     align-items: center;
@@ -82,13 +82,18 @@
     background-position: -428px -241px;
     height: 10px;
     width: 10px;
-    margin-right: 6px;
+    margin-right: 10px;
 }
 
 .search-text {
     font-size: 14px;
     font-weight: 300;
     color: rgb(219, 219, 219);
+    width: 200px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background-color:  #fafafa;
 }
 
 .navbar-icons {
@@ -148,16 +153,16 @@ main {
 .stories {
     background-color: white;
     width: 100%;
-    padding: 16px 0;
+    padding: 16px 0px;
     border: 1px solid var(--color-border);
-    border-radius: 3px;
-    height: 118px;
+    border-radius: 5px;
+    height: 100px;
     overflow: hidden ;
 }
 
 .stories-inner {
-    padding-left: 22px;
-    padding-top: 10px;
+    padding-left: 20px;
+    padding-top: 5px;
     display: flex;
     overflow-x: scroll;
 }
@@ -167,7 +172,7 @@ main {
 }
 
 .story {
-    margin-right: 22px;
+    margin-right: 20px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -195,13 +200,20 @@ main {
     margin-top: 6px;
     letter-spacing: .01em;
     max-width: 74px;
-    font-size: 12px;
-    font-weight: 400;
+    font-size: 11px;
+    font-weight: 500;
 }
-
+.posts{
+    border-radius: 5px;
+    margin-top: 24px;
+    border: 1px solid var(--color-border);
+  
+}
 .post {
     display: flex;
     flex-direction: column;
+    border: none;
+    /* border: 1px solid red; */
 }
 
 .header {
@@ -211,8 +223,9 @@ main {
     padding: 16px;
     background-color: white;
     width: 100%;
-    border: 1px solid var(--color-border);
-    margin-top: 24px;
+    border-bottom: 1px solid var(--color-border);
+    
+    ;
 }
 
 .profile-area {
@@ -472,14 +485,14 @@ main {
     position: fixed;
     top: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgb(13, 100, 89);
     width: 100vw;
     height: 100vh;
 }
 .upload-file {
     max-width: 400px;
     min-height: 336px;
-    background: rgb(141, 6, 96);
+    background: rgba(196, 207, 190, 0.884);
     box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
     border: 0.5px solid  grey;
     border-radius: 8px;
@@ -505,6 +518,7 @@ textarea {
     font-size: 15px;
     outline: none;
     padding: 10px;
+    border: none;
 }
 #send {
     margin-left: 110px;
@@ -514,8 +528,8 @@ textarea {
     border-radius: 8px;
     border: none;
     font-size: 15px;
-    color: black ;
-    background-color:turquoise;
+    color: rgb(241, 205, 205) ;
+    background-color:rgb(151, 54, 111);
 
 }
 #cancel {
@@ -523,10 +537,13 @@ textarea {
     border-radius: 8px;
     border: none;
     font-size: 15px;
-    color: black;
-    background-color:grey;
+    color: rgb(172, 149, 149);
+    background-color:black;
 
 
+}
+#progress {
+    margin-left: 110px;
 }
 .material-icons-outlined {
     cursor: pointer;
