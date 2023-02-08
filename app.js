@@ -24,6 +24,8 @@ class App {
     this.$app = document.querySelector("#app");
     this.$authContainer = document.querySelector("#firebaseui-auth-container");
     this.$username = document.querySelector(".username")
+    this.$person = document.querySelector("#person")
+    this.$name = document.querySelector(".name")
 
     // signout btn
     this.$logoutButton = document.querySelector(".logout");
@@ -63,6 +65,8 @@ class App {
       if (user) {
         this.userId = user.uid;
         this.$username.innerHTML = user.displayName
+        this.$person.innerHTML = user.displayName
+        this.$name.innerHTML = user.displayName
         this.post.username = user.displayName
         console.log(user.displayName);
         this.redirectToApp();
@@ -305,7 +309,6 @@ class App {
                 <span class="profile-name">${post.username}</span>
               </div>
               <div class="options" id="${post.id}">
-              <button type="button" class="more-btn"> 
               <div
               class="Igw0E rBNOH YBx95 _4EzTm"
               style="height: 24px; width: 24px"
@@ -341,7 +344,7 @@ class App {
                     ></circle>
                   </svg>
                   </div>
-                  </button>
+                
                   </div>
             </div>
             <div class="body">

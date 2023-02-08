@@ -158,6 +158,7 @@ main {
     border-radius: 5px;
     height: 100px;
     overflow: hidden ;
+    margin-bottom: 20px;
 }
 
 .stories-inner {
@@ -203,17 +204,19 @@ main {
     font-size: 11px;
     font-weight: 500;
 }
-.posts{
+/* .posts{
     border-radius: 5px;
-    margin-top: 24px;
-    border: 1px solid var(--color-border);
+    
+    
   
-}
+} */
 .post {
     display: flex;
     flex-direction: column;
     border: none;
-    /* border: 1px solid red; */
+    margin-bottom: 20px;
+    border-radius: 5px;
+    
 }
 
 .header {
@@ -327,6 +330,14 @@ main {
 .username {
     font-size: 14px;
     font-weight: 600;
+}
+
+#person {
+    align-items: center;
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 3px;
+    
 }
 .name {
     font-size: 12px;
