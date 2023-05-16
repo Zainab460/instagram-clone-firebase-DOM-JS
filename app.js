@@ -6,26 +6,24 @@
 //   }
 // }
 
-
 class App {
   constructor() {
     this.posts = [];
     this.files = [];
     this.post = {
-      id: cuid(),
+      id: Math.random() + "abc",
       caption: "",
       image: "",
-      username:"",
+      username: "",
       timestamp: this.getTimestamp(),
     };
-
 
     // Authentication
     this.$app = document.querySelector("#app");
     this.$authContainer = document.querySelector("#firebaseui-auth-container");
-    this.$username = document.querySelector(".username")
-    this.$person = document.querySelector("#person")
-    this.$name = document.querySelector(".name")
+    this.$username = document.querySelector(".username");
+    this.$person = document.querySelector("#person");
+    this.$name = document.querySelector(".name");
 
     // signout btn
     this.$logoutButton = document.querySelector(".logout");
@@ -41,7 +39,7 @@ class App {
     this.$progress = document.querySelector("#progress");
     this.$uploading = document.querySelector("#uploading");
     this.$posts = document.querySelector(".post");
-    this.$profileName = document.querySelector(".profile-name")
+    this.$profileName = document.querySelector(".profile-name");
 
     // modal form
     this.$optionButton = document.querySelector(".options");
@@ -49,7 +47,6 @@ class App {
     this.$defaultModal = document.querySelector(".default-modal");
     this.$editBtn = document.querySelector("#edit-btn");
     this.$deletePost = document.querySelector("#delete-post");
-
 
     // modal form
 
@@ -59,15 +56,15 @@ class App {
     this.addEventListeners();
     this.displayPost();
   }
-  
+
   manageAuth() {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.userId = user.uid;
-        this.$username.innerHTML = user.displayName
-        this.$person.innerHTML = user.displayName
-        this.$name.innerHTML = user.displayName
-        this.post.username = user.displayName
+        this.$username.innerHTML = user.displayName;
+        this.$person.innerHTML = user.displayName;
+        this.$name.innerHTML = user.displayName;
+        this.post.username = user.displayName;
         console.log(user.displayName);
         this.redirectToApp();
       } else {
@@ -108,7 +105,6 @@ class App {
     document.body.addEventListener("click", (event) => {
       this.openModal(event);
       this.closeModal(event);
-      
     });
     this.$filesUpload.addEventListener("change", (event) => {
       this.chosenFile(event);
@@ -127,26 +123,22 @@ class App {
     });
     this.$cancelBtn.addEventListener("click", (event) => {
       this.cancelUpload(event);
-    })
-    
-   
-   
-  };
- 
+    });
+    this.$deletePost.addEventListener("click", (event) => {
+      this.deleteHandler();
+    });
+  }
 
   openModal(event) {
-    const $BtnClickOnOptions = event.target.closest(".options")
-    if($BtnClickOnOptions) {
+    const $BtnClickOnOptions = event.target.closest(".options");
+    if ($BtnClickOnOptions) {
       this.$authModal.style.display = "block";
-
-    } 
-
+    }
   }
-  
 
   closeModal(event) {
-    if(event.target == this.$authModal) {
-      this.$authModal.style.display = "none"
+    if (event.target == this.$authModal) {
+      this.$authModal.style.display = "none";
     }
   }
 
@@ -171,7 +163,7 @@ class App {
     this.$postBox.style.display = "none";
     this.$authContainer.style.display = "none";
     this.$app.style.display = "block";
-  };
+  }
 
   chosenFile(event) {
     this.files = event.target.files;
@@ -203,23 +195,22 @@ class App {
 
     if (percentage) {
       this.$uploading.innerHTML = `${this.files[0].name} uploaded`;
-    } 
+    }
   }
 
   getFileUrl(name) {
     const imageRef = storage.ref(name);
-      imageRef
-        .getDownloadURL()
-        .then((url) => {
-          (this.post.image = url), this.posts.push(this.post);
-          console.log("image successful");
-          this.savePosts();
-        })
-        .catch((error) => {
-          console.log(error, "Error Occurred!");
-        });
-    }
-  
+    imageRef
+      .getDownloadURL()
+      .then((url) => {
+        (this.post.image = url), this.posts.push(this.post);
+        console.log("image successful");
+        this.savePosts();
+      })
+      .catch((error) => {
+        console.log(error, "Error Occurred!");
+      });
+  }
 
   getTimestamp() {
     const d = new Date();
@@ -243,7 +234,7 @@ class App {
           db.collection("users")
             .doc(this.userId)
             .set({
-              posts: this.posts
+              posts: this.posts,
             })
             .then(() => {
               console.log("Document successfully written!");
@@ -256,13 +247,12 @@ class App {
       .catch((error) => {
         console.log("Error getting document:", error);
       });
-
   }
   savePosts() {
     db.collection("users")
       .doc(this.userId)
       .set({
-        posts: this.posts
+        posts: this.posts,
       })
       .then(() => {
         console.log("Document successfully written!");
@@ -272,7 +262,7 @@ class App {
         console.error("Error writing document: ", error);
       });
   }
-  
+
   editPost(id, { caption, image }) {
     this.post = this.post.map((post) => {
       if (post.id == id) {
@@ -283,17 +273,23 @@ class App {
     });
     this.displayPost();
   }
-  deletePost(id) {
-    this.posts = this.posts.filter((post) => this.post.id != id);
-    this.displayPost();
-    this.savePosts();
-  }
+  deleteHandler(id) {
+
+    db.collection("users").doc(this.userId).delete(id).then(() => {
+      this.$posts.style.display ="none"
+      
+      console.log("Document successfully deleted!");
+  }).catch((error) => {
+
+      console.error("Error removing document: ", error);
+  });
+      this.$authModal.style.display = "none";
+    // this.posts.filter((post) => id !== post.id)
+    }
   displayPost() {
-    
-    this.$posts.innerHTML = this.posts.map( (post) => 
-
-    
-
+    this.$posts.innerHTML = this.posts
+      .map(
+        (post) =>
           `<div class="post" id="${post.id}">
             <div class="header">
               <div class="profile-area">
@@ -450,9 +446,7 @@ class App {
             `
       )
       .join("");
-    
   }
-
 }
 
 const app = new App();
