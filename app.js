@@ -11,7 +11,7 @@ class App {
     this.posts = [];
     this.files = [];
     this.post = {
-      id: Math.random() + "abc",
+      id: cuid(),
       caption: "",
       image: "",
       username: "",
@@ -105,6 +105,7 @@ class App {
     document.body.addEventListener("click", (event) => {
       this.openModal(event);
       this.closeModal(event);
+      this.handleDeletePost(event);
     });
     this.$filesUpload.addEventListener("change", (event) => {
       this.chosenFile(event);
@@ -123,9 +124,6 @@ class App {
     });
     this.$cancelBtn.addEventListener("click", (event) => {
       this.cancelUpload(event);
-    });
-    this.$deletePost.addEventListener("click", (event) => {
-      this.deleteHandler();
     });
   }
 
@@ -273,19 +271,39 @@ class App {
     });
     this.displayPost();
   }
-  deleteHandler(id) {
-
-    db.collection("users").doc(this.userId).delete(id).then(() => {
-      this.$posts.style.display ="none"
-      
-      console.log("Document successfully deleted!");
-  }).catch((error) => {
-
-      console.error("Error removing document: ", error);
-  });
+  handleDeletePost(event) {
+    const isDelBtnClickedOn = this.$deletePost.contains(event.target);
+    if (isDelBtnClickedOn) {
+      this.deleteHandler(id);
+      this.RemoveFromDB();
       this.$authModal.style.display = "none";
-    // this.posts.filter((post) => id !== post.id)
     }
+  }
+  RemoveFromDB() {
+    db.collection("users")
+      .doc(this.userId)
+      .delete(this.post.id)
+      .then((doc) => {
+        console.log("Document successfully deleted!");
+        location.reload();
+      })
+      .catch((error) => {
+        console.error("Error removing document: ", error);
+      });
+    // var docRef = db.collection("users").doc(this.userId)
+    // docRef
+    //   .delete(this.post.id)
+    //   .then((doc) => {
+    //     console.log("file succesfully deleted");
+    //     location.reload();
+    //   })
+    //   .catch((error) => {
+    //     console.log("Uh-oh, an error occurred!");
+    //   });
+  }
+  deleteHandler(id) {
+    this.posts = this.posts.filter((post) => id !== post.id);
+  }
   displayPost() {
     this.$posts.innerHTML = this.posts
       .map(
